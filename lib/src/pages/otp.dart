@@ -17,10 +17,7 @@ class OtpWidget extends StatefulWidget {
 
 class _OtpWidgetState extends State<OtpWidget> with CodeAutoFill {
   TextEditingController textControllerOTP = TextEditingController();
-  StreamController<ErrorAnimationType> errorController;
   SmsSender sender = new SmsSender();
-  bool hasError = false;
-  String otp;
   String textOTP;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
@@ -28,7 +25,6 @@ class _OtpWidgetState extends State<OtpWidget> with CodeAutoFill {
   @override
   void codeUpdated() {
     setState(() {
-      otp = widget.code;
       textControllerOTP.text = widget.code;
     });
   }
@@ -183,16 +179,6 @@ class _OtpWidgetState extends State<OtpWidget> with CodeAutoFill {
                                 onCompleted: (v) {
                                   debugPrint("Completed");
                                 },
-                                onChanged: (value) {
-                                  debugPrint(value);
-                                  setState(() {
-                                    otp = value;
-                                  });
-                                },
-                                beforeTextPaste: (text) {
-                                  debugPrint("Allowing to paste $text");
-                                  return true;
-                                },
                               ),
                             )
                           ],
@@ -221,16 +207,10 @@ class _OtpWidgetState extends State<OtpWidget> with CodeAutoFill {
                                     'JBSWY3DPEHPK3PXP',
                                     DateTime.now().millisecondsSinceEpoch);
 
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) {
-                                      return OtpWidget(
-                                          phone: widget.phone,
-                                          code: codeResend);
-                                    },
-                                  ),
-                                );
+                                setState(() {
+                                  textControllerOTP.text = "";
+                                  textOTP = codeResend;
+                                });
 
                                 smsData(codeResend);
                               },
