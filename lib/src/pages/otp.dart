@@ -49,9 +49,9 @@ class _OtpWidgetState extends State<OtpWidget> with CodeAutoFill {
         widget.phone, '<#>Hello there! ${codeOtpNew} $asignature'));
   }
 
-  void toastValidation(Color color, String user) {
+  void toastValidation(Color color, String text) {
     Fluttertoast.showToast(
-        msg: user,
+        msg: text,
         toastLength: Toast.LENGTH_SHORT,
         gravity: ToastGravity.CENTER,
         timeInSecForIosWeb: 1,

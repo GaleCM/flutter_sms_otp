@@ -22,9 +22,9 @@ class _HomeWidgetState extends State<HomeWidget> {
     phoneNumberController = TextEditingController();
   }
 
-  void toastValidation(Color color, String user) {
+  void toastValidation(Color color, String text) {
     Fluttertoast.showToast(
-        msg: user,
+        msg: text,
         toastLength: Toast.LENGTH_SHORT,
         gravity: ToastGravity.CENTER,
         timeInSecForIosWeb: 1,
